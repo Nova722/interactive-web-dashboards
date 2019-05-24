@@ -11,6 +11,7 @@ from sqlalchemy import create_engine
 from flask import Flask, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
 
+
 app = Flask(__name__)
 
 
@@ -18,7 +19,7 @@ app = Flask(__name__)
 # Database Setup
 #################################################
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('postgres://daiczgyuhujpqn:81fece2a5c18da5f8a8afba39e358d307a2dfa4d4ebb9b702227de1808fbdb08@ec2-50-19-127-115.compute-1.amazonaws.com:5432/dfnmlf9k7sgmdk', '') or 'sqlite:///db/bellybutton.sqlite'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('postgres://yhtwzpqhrvmihr:04498ebe08c0e534b4ea710373dacca85528b91c90eb2dd1eb3c1113ea8ebaad@ec2-23-23-92-204.compute-1.amazonaws.com:5432/dr62mgmfh5ck', '') or 'sqlite:///db/bellybutton.sqlite'
 
 db = SQLAlchemy(app)
 
@@ -96,6 +97,24 @@ def samples(sample):
         "otu_labels": sample_data.otu_label.tolist(),
     }
     return jsonify(data)
+
+@app.route("/wfreq/<sample>")
+def wfreq(sample):
+    sel2 = [
+    Samples_Metadata.sample,
+    Samples_Metadata.WFREQ,
+    ]
+
+    wfreq_results = db.session.query(*sel2).filter(Samples_Metadata.sample == sample).all()
+
+    sample_wfreq = {}
+
+    for result in wfreq_results:
+        sample_wfreq["sample"] = result[0]
+        sample_wfreq["WFREQ"] = result[1]
+
+    return jsonify(sample_wfreq)
+
 
 
 if __name__ == "__main__":
