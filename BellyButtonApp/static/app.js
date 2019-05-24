@@ -115,12 +115,8 @@ function gaugeChart(data) {
     textfont:{
       size : 16,
       },
-    marker: {colors:['rgba(6, 51, 0, .5)', 'rgba(9, 77, 0, .5)', 
-                           'rgba(12, 102, 0 ,.5)', 'rgba(14, 127, 0, .5)',
-                           'rgba(110, 154, 22, .5)','rgba(170, 202, 42, .5)', 
-                           'rgba(202, 209, 95, .5)','rgba(210, 206, 145, .5)', 
-                           'rgba(232, 226, 202, .5)','rgba(255, 255, 255, 0)'
-                    ]},
+    marker: {colors:['#0c3383','#800080', '#0a88ba', '#8fbc8f','#f2d338', '#f28f38',
+                    '#ff8000', '#d91e1e','#cc0000', 'rgba(255, 255, 255, 0)' ]},
     labels: ['8-9', '7-8', '6-7', '5-6', '4-5', '3-4', '2-3', '2-1', '0-1',''],
     hoverinfo: 'text',
     hole: .5,
@@ -151,10 +147,6 @@ function gaugeChart(data) {
 }
 
 
-
-
-
-
 //create function to build all the plots, Gauge chart has a different buildout to pie and bubble
 function buildCharts(sample) {
 
@@ -163,8 +155,11 @@ function buildCharts(sample) {
     pieChart(data);
     // @TODO: Build a Bubble Chart using the sample data
     bubbleChart(data);
-    //gaugeChart(data);
-    gaugeChart(data);
+
+    d3.json(`/wfreq/${sample}`).then ( wdata =>
+      // ## Gauge Chart ##
+      gaugeChart(wdata)
+    );
  
   });
 
