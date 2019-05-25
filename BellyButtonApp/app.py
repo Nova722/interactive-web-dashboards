@@ -19,7 +19,7 @@ app = Flask(__name__)
 # Database Setup
 #################################################
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('postgres://yhtwzpqhrvmihr:04498ebe08c0e534b4ea710373dacca85528b91c90eb2dd1eb3c1113ea8ebaad@ec2-23-23-92-204.compute-1.amazonaws.com:5432/dr62mgmfh5ck', '') or 'sqlite:///db/bellybutton.sqlite'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('postgres://cymmzeafxdjoyq:caf14356ded196b78c4a3ccfe7e45b7a7738ec0b0f264ec5a84b3f0e410581aa@ec2-54-225-106-93.compute-1.amazonaws.com:5432/de1io56onk6obh', '') or 'sqlite:///db/bellybutton.sqlite'
 
 db = SQLAlchemy(app)
 
